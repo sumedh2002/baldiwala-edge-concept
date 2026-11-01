@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baldiwala Edge — Website concept by Sumedh Ingle</title>
+<meta name="description" content="Baldiwala Edge is a Mumbai interior design studio led by Bakir and Ali Baldiwala. Residences, workplaces, public spaces and healthcare, designed around the people who use them.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0a09">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23151311'/><text x='50' y='64' font-family='Georgia' font-size='42' fill='%23f5f2ec' text-anchor='middle'>BE</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/build/wide/0001.webp">
+<style>
+:root{
+  --paper:#f5f2ec; --paper-2:#ece7de; --ink:#151311; --muted:#6c645a; --line:rgba(21,19,17,.13);
+  --night:#0b0a09; --oxblood:#6e1519; --brass:#a8864f;
+  --serif:"Instrument Serif", Georgia, serif; --sans:"Inter", system-ui, sans-serif;
+  --pad:clamp(20px,4.5vw,64px); --max:1320px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+section{padding:clamp(88px,11vw,160px) 0}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+h2{font-size:clamp(40px,5.4vw,80px)}
+h2 em,h1 em{font-style:italic}
+.label{font:500 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;font:500 13px var(--sans);letter-spacing:.04em;border:1px solid currentColor;transition:background .3s,color .3s,border-color .3s}
+.btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-dark:hover{background:var(--oxblood);border-color:var(--oxblood)}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:20;color:#fff;transition:background .35s,color .35s,box-shadow .35s}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
+.nav.light{background:rgba(245,242,236,.92);backdrop-filter:blur(10px);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.brand{display:flex;align-items:center;gap:12px}
+.mono{display:grid;place-items:center;width:34px;height:34px;border:1px solid currentColor;font:400 16px/1 var(--serif)}
+.word{font:500 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase}
+.concept-tag{font:500 9px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;border:1px solid currentColor;padding:4px 6px;opacity:.65}
+.links{display:flex;align-items:center;gap:32px;list-style:none;font-size:14px}
+.links a:not(.btn){opacity:.8;transition:opacity .2s}
+.links a:not(.btn):hover{opacity:1}
+.links .btn{padding:10px 18px}
+.nav:not(.light) .links .btn:hover{background:#fff;color:var(--ink);border-color:#fff}
+.menu-btn{display:none;font:500 12px var(--sans);letter-spacing:.18em;text-transform:uppercase;background:none;border:0;color:inherit;cursor:pointer;padding:8px 0}
+
+/* room build */
+.build{height:620vh;padding:0;background:var(--night);color:#f2eee7}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(11,10,9,.55),transparent 22%,transparent 62%,rgba(11,10,9,.7))}
+.caption{position:absolute;z-index:2;left:var(--pad);right:var(--pad);bottom:clamp(36px,8vh,84px);max-width:var(--max);margin:0 auto;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.caption.on{opacity:1;transform:none}
+.caption .label{color:rgba(242,238,231,.7)}
+.caption h1,.caption h2{font-size:clamp(40px,6.4vw,96px);margin-top:14px;max-width:13ch}
+.caption p{margin-top:12px;max-width:440px;color:rgba(242,238,231,.78)}
+.cue{position:absolute;z-index:2;right:var(--pad);bottom:clamp(36px,8vh,84px);display:flex;align-items:center;gap:12px;font:500 11px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:rgba(242,238,231,.7);transition:opacity .4s}
+.cue i{width:1px;height:42px;background:linear-gradient(currentColor,transparent);animation:cue 2s ease-in-out infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}60%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.progress{position:absolute;z-index:2;left:0;bottom:0;height:2px;width:0;background:var(--brass)}
+.loading{position:absolute;z-index:2;top:96px;left:50%;transform:translateX(-50%);white-space:nowrap;font:500 11px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:rgba(242,238,231,.55);transition:opacity .4s}
+
+/* studio */
+.studio-grid{display:grid;grid-template-columns:1fr;gap:48px}
+.lede{font:400 clamp(28px,3.4vw,48px)/1.18 var(--serif);max-width:22ch}
+.founders{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px}
+.founders div{border-top:1px solid var(--line);padding-top:20px}
+.founders h3{font-size:30px;margin:10px 0 8px}
+.founders p,.studio-copy p{color:var(--muted)}
+.studio-copy p+p{margin-top:16px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--line);padding-top:28px}
+.facts strong{display:block;font:400 clamp(30px,3.4vw,48px)/1 var(--serif);margin-bottom:8px}
+.facts span{color:var(--muted);font-size:14px}
+
+/* projects */
+.projects{background:var(--paper-2)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 64px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,72px)}
+.head p{max-width:380px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr;gap:44px 28px}
+.card .img{aspect-ratio:4/3;overflow:hidden;background:#ddd6ca}
+.card img{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.card:hover img{transform:scale(1.04)}
+.card figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:16px;border-bottom:1px solid var(--line);padding-bottom:14px}
+.card h3{font-size:28px}
+.card span{font-size:13px;color:var(--muted)}
+
+/* sectors */
+.sectors{list-style:none;border-top:1px solid var(--line)}
+.sectors li{display:grid;grid-template-columns:56px 1fr;gap:8px 24px;padding:28px 0;border-bottom:1px solid var(--line)}
+.sectors b{font:400 15px var(--sans);color:var(--muted)}
+.sectors h3{font-size:clamp(30px,3.2vw,44px)}
+.sectors p{grid-column:2;color:var(--muted);max-width:520px}
+
+/* inside the box */
+.box{background:var(--oxblood);color:#f6efe6}
+.box .label{color:rgba(246,239,230,.7)}
+.box-grid{display:grid;gap:48px}
+.box h2{margin-top:16px}
+.box .intro{margin-top:20px;color:rgba(246,239,230,.8);max-width:440px}
+.steps{list-style:none;counter-reset:s}
+.steps li{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:22px 0;border-top:1px solid rgba(246,239,230,.2)}
+.steps li:last-child{border-bottom:1px solid rgba(246,239,230,.2)}
+.steps b{font:italic 400 24px/1.2 var(--serif)}
+.box .btn{margin-top:32px;color:#f6efe6}
+.box .btn:hover{background:#f6efe6;color:var(--oxblood);border-color:#f6efe6}
+
+/* press */
+.press-list{list-style:none;display:grid;grid-template-columns:1fr;border-top:1px solid var(--line)}
+.press-list li{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);font:400 24px/1.2 var(--serif)}
+.press-list span{font:400 13px var(--sans);color:var(--muted);align-self:center}
+.honours{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.honours div{background:var(--paper-2);padding:28px}
+.honours strong{display:block;font:400 30px/1.1 var(--serif);margin-bottom:6px}
+.honours span{color:var(--muted);font-size:14px}
+
+/* contact */
+.contact{background:var(--night);color:#f2eee7;padding-bottom:40px}
+.contact .label{color:rgba(242,238,231,.6)}
+.contact h2{font-size:clamp(44px,5.4vw,88px);margin:18px 0 48px;max-width:12ch}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;border-top:1px solid rgba(242,238,231,.16);padding-top:28px}
+.contact-grid p{margin-top:10px;color:rgba(242,238,231,.85)}
+.contact-grid a{border-bottom:1px solid rgba(242,238,231,.3);white-space:nowrap}
+.contact-grid a:hover{border-color:#f2eee7}
+.contact-layout{display:grid;gap:56px}
+.enquiry{display:grid;gap:22px;align-content:start;border:1px solid rgba(242,238,231,.14);padding:clamp(24px,3vw,40px)}
+.enquiry .row{display:grid;gap:22px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field span{font:500 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:rgba(242,238,231,.6)}
+.field input,.field select,.field textarea{font:400 16px var(--sans);color:#f2eee7;background:transparent;border:0;border-bottom:1px solid rgba(242,238,231,.3);border-radius:0;padding:10px 0;transition:border-color .2s}
+.field select{appearance:none;cursor:pointer;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23f2eee7' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 2px center}
+.field select option{color:var(--ink)}
+.field select:has(option[value=""]:checked){color:rgba(242,238,231,.45)}
+.field textarea{resize:vertical;min-height:96px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#f2eee7}
+.field input:user-invalid,.field select:user-invalid{border-color:#e08a7e}
+.enquiry .btn{justify-self:start;margin-top:6px;background:#f2eee7;color:var(--night);border-color:#f2eee7}
+.enquiry .btn:hover{background:var(--brass);border-color:var(--brass)}
+.form-note{min-height:1.5em;font-size:14px;color:#dcc79f}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:96px;font-size:12px;color:rgba(242,238,231,.45)}
+.foot a:hover{color:#f2eee7}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (min-width:760px){
+  .grid{grid-template-columns:1fr 1fr}
+  .press-list{grid-template-columns:1fr 1fr;column-gap:48px}
+  .enquiry .row{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1000px){
+  .studio-grid{grid-template-columns:1.15fr 1fr;gap:clamp(48px,7vw,120px)}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .box-grid{grid-template-columns:1fr 1fr;gap:clamp(48px,7vw,120px);align-items:start}
+  .contact-layout{grid-template-columns:1fr 1fr;gap:clamp(56px,7vw,120px);align-items:start}
+}
+@media (max-width:860px){
+  .links{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:20px;padding:24px var(--pad) 32px;background:var(--paper);color:var(--ink);box-shadow:0 1px 0 var(--line);font-size:18px}
+  .nav.open .links{display:flex}
+  .nav.open{background:var(--paper);color:var(--ink)}
+  .menu-btn{display:block}
+  .founders,.facts,.honours{grid-template-columns:1fr}
+  .cue{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .cue i{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Baldiwala Edge, back to top"><span class="mono">BE</span><span class="word">Baldiwala Edge</span><span class="concept-tag">Concept</span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="links">Menu</button>
+    <ul class="links" id="links">
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#box">Inside The Box</a></li>
+      <li><a href="#press">Press</a></li>
+      <li><a class="btn" href="#contact">Enquire</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+  <section class="build" id="build" aria-label="A room by Baldiwala Edge, built as you scroll">
+    <div class="stage">
+      <canvas id="room" aria-hidden="true"></canvas>
+      <p class="loading" id="loading">Loading the room</p>
+      <div class="caption on" data-from="0" data-to="0.05">
+        <p class="label">Baldiwala Edge · Mumbai</p>
+        <h1>Every room starts as an <em>empty space.</em></h1>
+        <p>Scroll to watch one take shape.</p>
+      </div>
+      <div class="caption" data-from="0.06" data-to="0.16">
+        <p class="label">01 — Foundation</p>
+        <h2>A seamless stone floor, poured in place.</h2>
+      </div>
+      <div class="caption" data-from="0.19" data-to="0.38">
+        <p class="label">02 — Structure</p>
+        <h2>Soft grey walls and floor-to-ceiling glass.</h2>
+      </div>
+      <div class="caption" data-from="0.42" data-to="0.78">
+        <p class="label">03 — Furnishing</p>
+        <h2>Every piece chosen, placed and balanced.</h2>
+      </div>
+      <div class="caption" data-from="0.82" data-to="0.92">
+        <p class="label">04 — Light</p>
+        <h2>Then the light comes in.</h2>
+      </div>
+      <div class="caption" data-from="0.94" data-to="1.01">
+        <p class="label">Baldiwala Edge</p>
+        <h2>Building art you can live, work, <em>play in.</em></h2>
+      </div>
+      <span class="cue" id="cue"><i></i>Scroll</span>
+      <span class="progress" id="progress"></span>
+    </div>
+  </section>
+
+  <section id="studio">
+    <div class="wrap studio-grid">
+      <div class="reveal">
+        <p class="label">The studio</p>
+        <p class="lede" style="margin-top:20px">Interior design is as much about the inner landscape of people's minds and hearts as it is about structure and colour.</p>
+      </div>
+      <div class="studio-copy reveal">
+        <p>Baldiwala Edge is the father and son practice of Bakir and Ali Baldiwala. For more than four decades, first as Baldiwala Associates, the studio has designed corporate offices, residences, villas, public spaces and healthcare facilities, making sure nothing ever outweighs the value of human emotion.</p>
+        <p>Every project starts with the client's brief and ends with a space that fully reflects its purpose, its character and the way it will be used.</p>
+        <div class="founders">
+          <div><span class="label">Principal</span><h3>Bakir Baldiwala</h3><p>Experience and vision, with a leaning towards the classical and the elegant.</p></div>
+          <div><span class="label">Partner</span><h3>Ali Baldiwala</h3><p>Youthful dynamism, specialising in the futuristic and the contemporary.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="facts reveal">
+        <div><strong>Four decades</strong><span>of practice in Mumbai</span></div>
+        <div><strong>Four sectors</strong><span>Residential, commercial, public and healthcare</span></div>
+        <div><strong>Widely published</strong><span>Architectural Digest, Casa Vogue, Living Etc and more</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <div class="wrap">
+      <div class="head reveal">
+        <div><p class="label">Selected projects</p><h2 style="margin-top:16px">Spaces with <em>character</em></h2></div>
+        <p>Homes, workplaces, clubs and hospitals, each designed around the people who use them every day.</p>
+      </div>
+      <div class="grid">
+        <figure class="card reveal"><div class="img"><img loading="lazy" src="assets/img/elemental-sky-2.jpg" alt="Elemental Sky: living room with tufted velvet sofas, an emerald shell chair and a brass and glass chandelier"></div><figcaption><h3>Elemental Sky</h3><span>Residential</span></figcaption></figure>
+        <figure class="card reveal"><div class="img"><img loading="lazy" src="assets/img/mysiga-homu.jpg" alt="Mysiga Hōmu: dining room with timber slat screen, cane chairs and paper pendant lights"></div><figcaption><h3>Mysiga Hōmu</h3><span>Residential</span></figcaption></figure>
+        <figure class="card reveal"><div class="img"><img loading="lazy" src="assets/img/eclectic-tribe.jpg" alt="Eclectic Tribe: living room with a wooden swing seat, blue lounge chairs and city views"></div><figcaption><h3>Eclectic Tribe</h3><span>Residential</span></figcaption></figure>
+        <figure class="card reveal"><div class="img"><img loading="lazy" src="assets/img/the-weaver.jpg" alt="The Weaver: textile studio with fabric swatch wall, art and a patterned rug"></div><figcaption><h3>The Weaver</h3><span>Commercial</span></figcaption></figure>
+        <figure class="card reveal"><div class="img"><img loading="lazy" src="assets/img/wodehouse-gymkhana.jpg" alt="Wodehouse Gymkhana: atrium with carved timber balconies and a crystal chandelier"></div><figcaption><h3>Wodehouse Gymkhana</h3><span>Public</span></figcaption></figure>
+        <figure class="card reveal"><div class="img"><img loading="lazy" src="assets/img/breach-candy.jpg" alt="Breach Candy Hospital: reception with a curved timber ceiling and marble floor"></div><figcaption><h3>Breach Candy Hospital</h3><span>Health Care</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="sectors">
+    <div class="wrap">
+      <div class="head reveal">
+        <div><p class="label">What we design</p><h2 style="margin-top:16px">Four sectors, <em>one approach</em></h2></div>
+      </div>
+      <ul class="sectors reveal">
+        <li><b>01</b><h3>Residential</h3><p>Apartments, villas and family homes, shaped around the way each household lives.</p></li>
+        <li><b>02</b><h3>Commercial</h3><p>Offices and showrooms that work hard for a business and feel good to spend a day in.</p></li>
+        <li><b>03</b><h3>Public</h3><p>Clubs and shared spaces that respect their history and welcome everyone who walks in.</p></li>
+        <li><b>04</b><h3>Health Care</h3><p>Hospitals and clinics where calm, clear design helps patients and staff alike.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="box" id="box">
+    <div class="wrap box-grid">
+      <div class="reveal">
+        <p class="label">Inside The Box</p>
+        <h2>Our virtual design service.</h2>
+        <p class="intro">Refresh a room without a full project. Our designers hand-pick every piece and guide you at each step, all from the comfort of your home.</p>
+        <a class="btn" href="#contact">Let's discuss your box</a>
+      </div>
+      <ol class="steps reveal">
+        <li><b>01</b><span>Fill out a short form and send in pictures of your space.</span></li>
+        <li><b>02</b><span>Get on a call with our designers to talk through your requirements, style and personality.</span></li>
+        <li><b>03</b><span>Receive personalised mood boards with products curated for you, and make changes as you like.</span></li>
+        <li><b>04</b><span>Finalise the look. Your pieces are delivered to your door in about two weeks.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="press">
+    <div class="wrap">
+      <div class="head reveal">
+        <div><p class="label">Press</p><h2 style="margin-top:16px">As featured in</h2></div>
+      </div>
+      <ul class="press-list reveal">
+        <li>Architectural Digest<span>2016, 2018</span></li>
+        <li>Good Homes<span>2020</span></li>
+        <li>Ideal Home<span>2018, 2020</span></li>
+        <li>Living Etc<span>2019</span></li>
+        <li>Casa Vogue<span>2018</span></li>
+        <li>Trends<span>2019</span></li>
+        <li>Design Source<span>2018</span></li>
+        <li>Society Interiors<span>2016</span></li>
+      </ul>
+      <div class="honours reveal">
+        <div><strong>Forbes</strong><span>30 Under 45 Designers</span></div>
+        <div><strong>Architecture + Design</strong><span>Top Fifty</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-layout">
+        <div>
+          <p class="label">Contact</p>
+          <h2>Let's design your <em>next space.</em></h2>
+          <div class="contact-grid">
+            <div><span class="label">Studio</span><p>21, Suleman Chambers, 4 Battery St., Apollo Bunder, Colaba, Mumbai 400001</p></div>
+            <div><span class="label">Call</span><p><a href="tel:+912222025111">+91 22 2202 5111</a></p></div>
+            <div><span class="label">Email</span><p><a href="mailto:info@baldiwalaedge.com">info@baldiwalaedge.com</a></p></div>
+            <div><span class="label">Instagram</span><p><a href="https://www.instagram.com/baldiwala_edge/" target="_blank" rel="noopener">@baldiwala_edge</a></p></div>
+          </div>
+        </div>
+        <form class="enquiry" id="enquiry">
+          <p class="label">Project enquiry</p>
+          <div class="row">
+            <label class="field"><span>Name</span><input name="name" autocomplete="name" required></label>
+            <label class="field"><span>Phone</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel"></label>
+          </div>
+          <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
+          <div class="row">
+            <label class="field"><span>Project type</span>
+              <select name="type" required><option value="" disabled selected>Select</option><option>Residential</option><option>Commercial</option><option>Public</option><option>Health Care</option><option>Inside The Box</option></select></label>
+            <label class="field"><span>Budget</span>
+              <select name="budget"><option value="" selected>Select</option><option>Under ₹25 lakh</option><option>₹25 – 50 lakh</option><option>₹50 lakh – ₹1 crore</option><option>Above ₹1 crore</option></select></label>
+          </div>
+          <label class="field"><span>Tell us about your space</span><textarea name="message" rows="4"></textarea></label>
+          <button class="btn" type="submit">Send enquiry</button>
+          <p class="form-note" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="foot">
+        <span>© Baldiwala Edge</span>
+        <span>Website concept by <a href="https://sumedhingle.com" target="_blank" rel="noopener">Sumedh Ingle</a></span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+// ---------- room build: scroll scrubs a rendered frame sequence ----------
+const FRAMES = 100;
+const build = document.getElementById('build');
+const canvas = document.getElementById('room');
+const ctx = canvas.getContext('2d');
+const caps = [...document.querySelectorAll('.caption')];
+const cue = document.getElementById('cue');
+const bar = document.getElementById('progress');
+const loading = document.getElementById('loading');
+const tall = () => innerWidth / innerHeight < 0.8;
+let set = null, imgs = [], shown = -1, target = 0, current = 0;
+
+function load(kind) {
+  if (set === kind) return;
+  set = kind; shown = -1;
+  imgs = Array.from({ length: FRAMES }, (_, i) => {
+    const im = new Image();
+    im.decoding = 'async';
+    im.src = `assets/build/${kind}/${String(i + 1).padStart(4, '0')}.webp`;
+    im.onload = () => { if (i === 0) loading.style.opacity = 0; };
+    im.onerror = () => { if (i === 0 && kind === 'tall') load('wide'); }; // phone frames missing: crop the desktop ones
+    return im;
+  });
+}
+function size() {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
+  load(tall() ? 'tall' : 'wide');
+  shown = -1;
+}
+function draw(i) {
+  // nearest frame that has finished loading, so scrolling never shows a blank
+  let k = i;
+  while (k > 0 && !(imgs[k].complete && imgs[k].naturalWidth)) k--;
+  const im = imgs[k];
+  if (!im.complete || !im.naturalWidth || k === shown) return;
+  shown = k;
+  const s = Math.max(canvas.width / im.naturalWidth, canvas.height / im.naturalHeight);
+  const w = im.naturalWidth * s, h = im.naturalHeight * s;
+  ctx.drawImage(im, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+}
+function progress() {
+  const r = build.getBoundingClientRect();
+  return Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+}
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function tick() {
+  target = progress();
+  current = still ? target : current + (target - current) * 0.18;
+  draw(Math.round(current * (FRAMES - 1)));
+  bar.style.width = current * 100 + '%';
+  cue.style.opacity = target > 0.02 ? 0 : 1;
+  caps.forEach(c => c.classList.toggle('on', target >= +c.dataset.from && target < +c.dataset.to));
+  requestAnimationFrame(tick);
+}
+size();
+addEventListener('resize', size);
+requestAnimationFrame(tick);
+
+// ---------- nav ----------
+const nav = document.getElementById('nav');
+const menuBtn = nav.querySelector('.menu-btn');
+const setMenu = open => { nav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open); menuBtn.textContent = open ? 'Close' : 'Menu'; };
+menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+nav.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+const darkSections = [build, document.getElementById('contact')];
+addEventListener('scroll', () => {
+  const y = 38; // nav midline
+  nav.classList.toggle('light', !darkSections.some(s => { const r = s.getBoundingClientRect(); return r.top <= y && r.bottom > y; }));
+}, { passive: true });
+
+// ---------- enquiry ----------
+// shortcut: no backend yet, the form only confirms on screen; connect it to the studio's inbox (e.g. Formspree) before launch
+document.getElementById('enquiry').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  const first = f.elements.name.value.trim().split(/\s+/)[0];
+  f.querySelector('.form-note').textContent = `Thank you, ${first}. The studio will be in touch shortly.`;
+  f.reset();
+});
+
+// ---------- gentle reveals ----------
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
